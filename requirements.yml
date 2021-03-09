@@ -7,3 +7,5 @@ roles:
     version: 3.0.0
   - name: caddy_ansible.caddy_ansible
     version: TODO (wait for MRs)
+  - name: cloudalchemy.prometheus
+  - name: cloudalchemy.grafana
