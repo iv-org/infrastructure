@@ -1,3 +1,4 @@
+---
 ansible_python_interpreter: /usr/bin/python3
 ansible_user: root
 ansible_port: 233
@@ -11,6 +12,7 @@ apt_packages:
   - net-tools
   - python3-setuptools
   - jq
+  - prometheus-node-exporter
 
 pip_install_packages:
   - name: docker

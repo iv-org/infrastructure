@@ -27,10 +27,27 @@
         name: "{{ apt_packages }}"
       tags: [apt,base]
 
+    - name: Bind node exporter to localhost
+      ansible.builtin.lineinfile:
+        path: /etc/default/prometheus-node-exporter
+        regexp: '^ARGS='
+        line: ARGS=--web.listen-address=localhost:9100
+      tags: [apt,base]
+
     - name: unattended-upgrades
       import_role:
         name: jvn.unattended-upgrades
       tags: [unattended-upgrades]
+
+    - name: prometheus
+      import_role:
+        name: cloudalchemy.prometheus
+      tags: [prometheus]
+
+    - name: grafana
+      import_role:
+        name: cloudalchemy.grafana
+      tags: [grafana]
 
     - name: pip
       import_role:

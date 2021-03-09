@@ -1,0 +1,36 @@
+---
+prometheus_web_listen_address: "127.0.0.1:9090"
+prometheus_scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: "node"
+    static_configs:
+      - targets: ['localhost:9100']
+  - job_name: "caddy"
+    static_configs:
+      - targets: ['127.0.0.1:2019']
+
+grafana_url: "https://grafana.invidious.io"
+grafana_domain: grafana.invidious.io
+grafana_address: 127.0.0.1
+grafana_port: 2000
+grafana_security:
+  admin_user: admin
+  admin_password: "{{ vault_grafana_admin_password }}"
+  disable_gravatar: true
+  cookie_secure: true
+grafana_auth:
+  anonymous:
+    enabled: true
+grafana_datasources:
+  - name: Prometheus
+    type: prometheus
+    url: http://localhost:9090
+grafana_dashboards:
+  - dashboard_id: '1860'
+    revision_id: '22'
+    datasource: 'Prometheus'
+  - dashboard_id: '13460'
+    revision_id: '2'
+    datasource: 'Prometheus'
