@@ -1,0 +1,7 @@
+---
+all:
+  children:
+    main:
+      hosts:
+        invidious.io:
+          ansible_host: 188.34.196.170

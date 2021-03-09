@@ -1,0 +1,89 @@
+---
+- hosts: main
+  handlers:
+    - name: restart ssh
+      systemd:
+        name: sshd
+        state: restarted
+
+  tasks:
+    - name: SSH config
+      template:
+        src: sshd_config.j2
+        dest: /etc/ssh/sshd_config
+        mode: 0644
+      notify: restart ssh
+      tags: [ssh,base]
+
+    - name: SSH keys
+      template:
+        src: authorized_keys.j2
+        dest: /root/.ssh/authorized_keys
+        mode: 0600
+      tags: [ssh,base]
+
+    - name: Install packages
+      apt:
+        name: "{{ apt_packages }}"
+      tags: [apt,base]
+
+    - name: unattended-upgrades
+      import_role:
+        name: jvn.unattended-upgrades
+      tags: [unattended-upgrades]
+
+    - name: pip
+      import_role:
+        name: geerlingguy.pip
+      tags: [pip,docker]
+
+    - name: docker
+      import_role:
+        name: geerlingguy.docker
+      tags: [dockerd,docker]
+
+    - name: Create Invidious API container
+      community.docker.docker_container:
+        name: api
+        image: quay.io/invidious/instances:latest
+        pull: true
+        restart_policy: unless-stopped
+        published_ports:
+          - "127.0.0.1:3000:3000"
+      tags: [api,instances,docker]
+
+    - name: Create Invidious redirect container
+      community.docker.docker_container:
+        name: redirect
+        image: quay.io/invidious/invidious-redirect:latest
+        pull: true
+        restart_policy: unless-stopped
+        published_ports:
+          - "127.0.0.1:8080:80"
+      tags: [redirect,docker]
+
+    - name: Create wikijs compose folder
+      file:
+        path: /root/compose/wikijs/
+        state: directory
+        recurse: true
+        mode: 0755
+      tags: [wikijs,docker]
+
+    - name: Template wikijs docker compose
+      template:
+        src: docker-compose-wikijs.yml
+        dest: /root/compose/wikijs/docker-compose.yml
+        mode: 0600
+      tags: [wikijs,docker]
+
+    - name: Compose wikijs
+      community.docker.docker_compose:
+        project_src: /root/compose/wikijs
+        pull: true
+      tags: [wikijs,docker]
+
+    - name: caddy
+      import_role:
+        name: caddy_ansible.caddy_ansible
+      tags: [ caddy ]

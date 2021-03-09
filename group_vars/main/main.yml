@@ -1,0 +1,22 @@
+ansible_python_interpreter: /usr/bin/python3
+ansible_user: root
+ansible_port: 233
+
+apt_packages:
+  - vim
+  - tmux
+  - screen
+  - htop
+  - bash-completion
+  - net-tools
+  - python3-setuptools
+  - jq
+
+pip_install_packages:
+  - name: docker
+  - name: docker-compose
+
+caddy_user: caddy
+caddy_setcap: false
+caddy_systemd_capabilities_enabled: true
+caddy_config: "{{ lookup('template', 'templates/Caddyfile.j2') }}"

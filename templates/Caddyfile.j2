@@ -1,0 +1,66 @@
+# {{ ansible_managed }}
+
+(common) {
+  encode gzip
+  log {
+    output file /var/log/caddy/access.log {
+      roll_size 500mb
+      roll_keep 5
+    }
+    format filter {
+      wrap json
+      fields {
+        common_log delete
+        request>remote_addr ip_mask {
+          ipv4 24
+          ipv6 32
+        }
+      }
+    }
+  }
+}
+
+www.invidio.us {
+  import common
+  redir https://invidious.io{uri}
+}
+invidious.io {
+  import common
+  root * /var/www/invidious.io
+  file_server
+}
+git.invidious.io {
+  import common
+  redir https://github.com/iv-org/invidious
+}
+
+invidio.us {
+  import common
+  redir https://redirect.invidious.io{uri}
+  header /api* content-type "application/json"
+  respond /api* "{\"error\":\"This server no longer hosts the Invidious API.\"}" 410
+}
+redirect.invidious.io {
+  import common
+  reverse_proxy http://127.0.0.1:8080
+}
+
+instances.invidio.us {
+  import common
+  redir https://api.invidious.io{uri}
+}
+api.invidious.io {
+  import common
+  reverse_proxy http://127.0.0.1:3000
+  header /static* Cache-Control "max-age=86400"
+}
+
+uptime.invidio.us {
+  import common
+  redir https://uptime.invidious.io{uri}
+}
+
+docs.invidious.io {
+  import common
+  reverse_proxy http://127.0.0.1:3001
+}

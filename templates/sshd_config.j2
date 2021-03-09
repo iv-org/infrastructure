@@ -1,0 +1,27 @@
+Protocol 2
+Port {{ ansible_port }}
+ListenAddress {{ ansible_default_ipv4.address }}
+ListenAddress {{ ansible_default_ipv6.address }}
+
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+PermitRootLogin without-password
+StrictModes yes
+MaxAuthTries 2
+AllowUsers root
+
+PubkeyAuthentication yes
+AuthenticationMethods publickey
+AuthorizedKeysFile     .ssh/authorized_keys
+PasswordAuthentication no
+PermitEmptyPasswords no
+
+IgnoreRhosts yes
+UsePAM yes
+ChallengeResponseAuthentication no
+PrintMotd no
+X11Forwarding no
+AllowTcpForwarding no
+
+Subsystem sftp /usr/lib/openssh/sftp-server
