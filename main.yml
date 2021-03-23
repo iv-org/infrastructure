@@ -36,7 +36,7 @@
 
     - name: unattended-upgrades
       import_role:
-        name: jvn.unattended-upgrades
+        name: jnv.unattended-upgrades
       tags: [unattended-upgrades]
 
     - name: prometheus
