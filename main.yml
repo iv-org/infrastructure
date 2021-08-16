@@ -75,6 +75,7 @@
         image: quay.io/invidious/invidious-redirect:latest
         pull: true
         restart_policy: unless-stopped
+        log_driver: none
         published_ports:
           - "127.0.0.1:8080:80"
       tags: [redirect,docker]
