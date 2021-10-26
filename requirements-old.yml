@@ -1,0 +1,10 @@
+roles:
+  - name: jnv.unattended-upgrades
+    version: v1.10.0
+  - name: geerlingguy.pip
+    version: 2.0.0
+  - name: geerlingguy.docker
+    version: 3.0.0
+  - name: caddy_ansible.caddy_ansible
+  - name: cloudalchemy.prometheus
+  - name: cloudalchemy.grafana

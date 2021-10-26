@@ -12,7 +12,6 @@ apt_packages:
   - net-tools
   - python3-setuptools
   - jq
-  - prometheus-node-exporter
 
 pip_install_packages:
   - name: docker
