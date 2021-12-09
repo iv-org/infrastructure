@@ -29,11 +29,11 @@ www.invidio.us {
   import common
   redir https://invidious.io{uri}
 }
-#invidious.io {
-#  import common
-#  root * /var/www/invidious.io
-#  file_server
-#}
+invidious.io {
+  import common
+  reverse_proxy http://127.0.0.1:8081
+}
+
 git.invidious.io {
   import common
   redir https://github.com/iv-org/invidious

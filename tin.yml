@@ -49,11 +49,17 @@
         app: instances-api
       tags: [instances-api, api, docker]
 
-    - name: Deploy invidious api
+    - name: Deploy invidious redirect
       import_tasks: tasks/compose.yml
       vars:
         app: redirect
       tags: [redirect, docker]
+
+    - name: Deploy invidious website
+      import_tasks: tasks/compose.yml
+      vars:
+        app: invidious.io
+      tags: [website, docker]
 
     - name: caddy
       import_role:
