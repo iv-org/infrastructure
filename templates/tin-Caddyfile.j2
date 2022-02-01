@@ -2,11 +2,6 @@
 
 (common) {
   encode gzip
-  respond /robots.txt 200 {
-    body "User-agent: *
-Disallow: /
-"
-}
   log {
     output file /var/log/caddy/access.log {
       roll_size 500mb
@@ -25,8 +20,17 @@ Disallow: /
   }
 }
 
+(block-robots) {
+  respond /robots.txt 200 {
+    body "User-agent: *
+Disallow: /
+"
+}
+}
+
 www.invidio.us {
   import common
+  import block-robots
   redir https://invidious.io{uri}
 }
 invidious.io {
@@ -36,36 +40,43 @@ invidious.io {
 
 git.invidious.io {
   import common
+  import block-robots
   redir https://github.com/iv-org/invidious
 }
 
 invidio.us {
   import common
+  import block-robots
   redir https://redirect.invidious.io{uri}
   header /api* content-type "application/json"
   respond /api* "{\"error\":\"This server no longer hosts the Invidious API.\"}" 410
 }
 redirect.invidious.io {
   import common
+  import block-robots
   reverse_proxy http://127.0.0.1:8080
 }
 
 instances.invidio.us {
   import common
+  import block-robots
   redir https://api.invidious.io{uri}
 }
 api.invidious.io {
   import common
+  import block-robots
   reverse_proxy http://127.0.0.1:3000
   header /static* Cache-Control "max-age=86400"
 }
 
 uptime.invidio.us {
   import common
+  import block-robots
   redir https://stats.uptimerobot.com/89VnzSKAn{uri}
 }
 uptime.invidious.io {
   import common
+  import block-robots
   redir https://stats.uptimerobot.com/89VnzSKAn{uri}
 }
 
@@ -81,5 +92,6 @@ instances.invidious.io {
 
 todo.invidious.io {
   import common
+  import block-robots
   redir https://github.com/orgs/iv-org/projects
 }
