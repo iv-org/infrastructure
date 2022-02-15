@@ -1,6 +1,6 @@
 ---
 services:
-  api:
+  website:
     image: quay.io/invidious/invidious.io:latest
     restart: unless-stopped
     ports:
