@@ -1,9 +1,14 @@
 ---
+- name: Create compose base folder
+  file:
+    path: "/root/compose"
+    state: directory
+    mode: 0755
+
 - name: Create compose folders
   file:
     path: "/root/compose/{{ app }}"
     state: directory
-    recurse: true
     mode: 0755
 
 - name: Template compose files
