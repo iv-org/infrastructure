@@ -1,0 +1,18 @@
+---
+services:
+  server:
+    image: docker.io/gitea/gitea:1.16.2
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: unless-stopped
+    volumes:
+      - gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3200:3000"
+      - "222:22"
+
+volumes:
+  gitea:

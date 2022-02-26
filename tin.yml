@@ -61,6 +61,12 @@
         app: invidious.io
       tags: [website, docker]
 
+    - name: Deploy gitea
+      import_tasks: tasks/compose.yml
+      vars:
+        app: gitea
+      tags: [gitea, docker]
+
     - name: caddy
       import_role:
         name: caddy_ansible.caddy_ansible

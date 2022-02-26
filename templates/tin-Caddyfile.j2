@@ -43,6 +43,11 @@ git.invidious.io {
   import block-robots
   redir https://github.com/iv-org/invidious
 }
+gitea.invidious.io {
+  import common
+  import block-robots
+  reverse_proxy http://127.0.0.1:3200
+}
 
 invidio.us {
   import common
