@@ -1,0 +1,7 @@
+---
+services:
+  docs:
+    image: quay.io/invidious/docs.invidious.io:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8082:80"
