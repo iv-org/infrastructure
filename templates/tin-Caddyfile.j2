@@ -85,14 +85,14 @@ uptime.invidious.io {
   redir https://stats.uptimerobot.com/89VnzSKAn{uri}
 }
 
-#docs.invidious.io {
-#  import common
-#  reverse_proxy http://127.0.0.1:3001
-#}
+docs.invidious.io {
+  import common
+  reverse_proxy http://127.0.0.1:8082
+}
 
 instances.invidious.io {
   import common
-  redir https://docs.invidious.io/Invidious-Instances.md
+  redir https://docs.invidious.io/instances/
 }
 
 todo.invidious.io {
