@@ -1,7 +1,9 @@
 Protocol 2
 Port {{ ansible_port }}
 ListenAddress {{ ansible_default_ipv4.address }}
+{% if ansible_default_ipv6.address is defined %}
 ListenAddress {{ ansible_default_ipv6.address }}
+{% endif %}
 
 HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key

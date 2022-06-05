@@ -5,3 +5,4 @@ all:
       hosts:
         invidious.io:
         tin.invidious.io:
+        dia.invidious.io:
