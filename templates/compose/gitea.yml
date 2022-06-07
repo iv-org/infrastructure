@@ -1,7 +1,7 @@
 ---
 services:
   server:
-    image: docker.io/gitea/gitea:1.16.2
+    image: docker.io/gitea/gitea:latest
     environment:
       - USER_UID=1000
       - USER_GID=1000
