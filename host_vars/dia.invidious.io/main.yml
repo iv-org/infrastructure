@@ -1,3 +1,8 @@
 ---
 docker_compose_version: "1.29.2"
 caddy_config: "{{ lookup('template', 'templates/dia-Caddyfile.j2') }}"
+
+unattended_origins_patterns:
+  - 'origin=Debian,codename=${distro_codename},label=Debian-Security'
+  - 'origin=Debian,codename=${distro_codename}-security,label=Debian-Security'
+  - 'o=Debian,codename=${distro_codename},label=Debian'
