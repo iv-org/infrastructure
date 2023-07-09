@@ -73,6 +73,12 @@
         app: "docs.invidious.io"
       tags: [docs, docker]
 
+    - name: Deploy watchtower
+      import_tasks: tasks/compose.yml
+      vars:
+        app: "watchtower"
+      tags: [watchtower, docker]
+
     - name: caddy
       import_role:
         name: caddy_ansible.caddy_ansible
