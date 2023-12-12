@@ -8,3 +8,11 @@ services:
     # disable (spammy logs)
     logging:
       driver: "none"
+
+networks:
+  default:
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: 2001:0DB9::/112
+          gateway: 2001:0DB9::1

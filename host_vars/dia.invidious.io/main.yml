@@ -6,3 +6,7 @@ unattended_origins_patterns:
   - 'origin=Debian,codename=${distro_codename},label=Debian-Security'
   - 'origin=Debian,codename=${distro_codename}-security,label=Debian-Security'
   - 'o=Debian,codename=${distro_codename},label=Debian'
+
+docker_daemon_options:
+  experimental: true
+  ip6tables: true

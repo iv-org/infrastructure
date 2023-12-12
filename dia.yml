@@ -1,12 +1,24 @@
 ---
 - hosts: dia.invidious.io
   handlers:
+    - name: restart networking
+      systemd:
+        name: networking
+        state: restarted
+
     - name: restart ssh
       systemd:
         name: sshd
         state: restarted
 
   tasks:
+    - name: HE IPv6 network config
+      copy:
+        src: he-ipv6
+        dest: /etc/network/interfaces.d/he-ipv6
+        mode: 0644
+      notify: restart networking
+
     - name: SSH config
       template:
         src: sshd_config.j2

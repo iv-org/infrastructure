@@ -1,0 +1,8 @@
+auto he-ipv6
+iface he-ipv6 inet6 v4tunnel
+        address 2001:470:1f1c:685::2
+        netmask 64
+        endpoint 216.66.88.98
+        local 93.95.230.186
+        ttl 255
+        gateway 2001:470:1f1c:685::1
