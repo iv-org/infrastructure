@@ -1,3 +1,0 @@
----
-docker_compose_version: "1.29.2"
-caddy_config: "{{ lookup('template', 'templates/tin-Caddyfile.j2') }}"
