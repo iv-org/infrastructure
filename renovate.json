@@ -3,6 +3,7 @@
   "extends": [
     "config:base"
   ],
+  "ignorePaths": ["requirements.yml"],
   "docker-compose": {
     "fileMatch": ["templates/compose/*"]
   }
