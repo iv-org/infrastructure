@@ -1,7 +1,7 @@
 services:
   watchtower:
     container_name: watchtower
-    image: containrrr/watchtower:latest
+    image: ghcr.io/containrrr/watchtower:1.7.1
     restart: unless-stopped
     environment:
       - 'WATCHTOWER_CLEANUP=true'
