@@ -1,0 +1,10 @@
+services:
+  watchtower:
+    container_name: watchtower
+    image: ghcr.io/containrrr/watchtower:1.7.1
+    restart: unless-stopped
+    environment:
+      - 'WATCHTOWER_CLEANUP=true'
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    command: --interval 3600 docsinvidiousio_docs_1
