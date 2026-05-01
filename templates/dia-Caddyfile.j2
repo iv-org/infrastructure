@@ -43,10 +43,18 @@ git.invidious.io {
   import block-robots
   redir https://github.com/iv-org/invidious
 }
+
 gitea.invidious.io {
   import common
   import block-robots
+  route {
+    basicauth {
+    # See https://docs.invidious.io/gitea/
+		# Username "invidious" / password "invidious"
+		invidious JDJhJDE0JGdKZ3RXRThhNktiN2lKT1FXOEF2NS54NUtTR09ZaXdUeVk1LllQdnlBeFpyMWgwbkRZZjdD
+	}
   reverse_proxy http://127.0.0.1:3200
+  }
 }
 
 invidio.us {
