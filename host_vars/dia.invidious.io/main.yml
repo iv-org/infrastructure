@@ -10,3 +10,7 @@ unattended_origins_patterns:
 docker_daemon_options:
   experimental: true
   ip6tables: true
+  log-driver: "json-file"
+  log-opts:
+    max-size: "200m"
+    max-file: "3"
